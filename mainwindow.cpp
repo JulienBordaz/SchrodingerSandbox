@@ -435,6 +435,20 @@ void MainWindow::newSimulation()
         switch (option)
         {
             case 0:
+                rstpot_butt();
+                this->simulationSettings=SimulationSettings();
+                this->simulationSettings.setRx(320);
+                this->simulationSettings.setRy(160);
+                this->simulationSettings.potDistr->zeroPotential();
+                this->simulationSettings.potDistr->setRectangle(395,400,5,310,0.0035);
+                this->ui->setSigmaSlider->setSliderPosition(50);
+                this->ui->setkSlider->setSliderPosition(50);
+                this->kSelectArea->setkx(1);
+                this->kSelectArea->setky(0);
+                updateInitialCond();
+                this->qwave.initiateWavePacket(this->simulationSettings);
+                this->qwave.initiatePropx();
+                rst_butt();
                 break;
             case 1:
                 rstpot_butt();
@@ -445,18 +459,47 @@ void MainWindow::newSimulation()
                 this->simulationSettings.potDistr->setRectangle(400,410,156,164,10000);
                 this->simulationSettings.potDistr->setRectangle(400,410,170,300,10000);
                 this->simulationSettings.potDistr->setRectangle(400,410,10,150,10000);
-                this->ui->setSigmaSlider->setSliderPosition(5*this->simulationSettings.getSigma());
-                this->ui->setkSlider->setSliderPosition(25*sqrt( this->simulationSettings.getKx()*this->simulationSettings.getKx()+this->simulationSettings.getKy()*this->simulationSettings.getKy()));
-                this->kSelectArea->setkx(this->simulationSettings.getKx()*25/this->ui->setkSlider->sliderPosition());
-                this->kSelectArea->setky(this->simulationSettings.getKy()*25/this->ui->setkSlider->sliderPosition());
+                this->ui->setSigmaSlider->setSliderPosition(50);
+                this->ui->setkSlider->setSliderPosition(50);
+                this->kSelectArea->setkx(1);
+                this->kSelectArea->setky(0);
+                updateInitialCond();
                 this->qwave.initiateWavePacket(this->simulationSettings);
                 this->qwave.initiatePropx();
                 rst_butt();
                 break;
             case 2:
+                rstpot_butt();
+                this->simulationSettings=SimulationSettings();
+                this->simulationSettings.setRx(320);
+                this->simulationSettings.setRy(160);
+                this->simulationSettings.potDistr->zeroPotential();
+                this->simulationSettings.potDistr->setRectangle(400,410,156,164,10000);
+                this->simulationSettings.potDistr->setRectangle(400,410,170,300,10000);
+                this->simulationSettings.potDistr->setRectangle(400,410,10,150,10000);
+                this->ui->setSigmaSlider->setSliderPosition(50);
+                this->ui->setkSlider->setSliderPosition(50);
+                this->kSelectArea->setkx(1);
+                this->kSelectArea->setky(0);
+                updateInitialCond();
+                this->qwave.initiateWavePacket(this->simulationSettings);
+                this->qwave.initiatePropx();
+                rst_butt();
                 break;
             case 3:
                 rstpot_butt();
+                this->simulationSettings=SimulationSettings();
+                this->simulationSettings.setRx(320);
+                this->simulationSettings.setRy(160);
+                this->simulationSettings.potDistr->zeroPotential();
+                this->ui->setSigmaSlider->setSliderPosition(50);
+                this->ui->setkSlider->setSliderPosition(50);
+                this->kSelectArea->setkx(1);
+                this->kSelectArea->setky(0);
+                updateInitialCond();
+                this->qwave.initiateWavePacket(this->simulationSettings);
+                this->qwave.initiatePropx();
+                rst_butt();
                 break;
         }
     }
