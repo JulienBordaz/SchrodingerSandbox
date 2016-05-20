@@ -59,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) :
     connect(this->ui->radioIm, SIGNAL(clicked()) ,this, SLOT(setDisplayIm()));
     connect(this->ui->radioNorm, SIGNAL(clicked()) ,this, SLOT(setDisplayNorm()));
 
-    setWindowTitle(tr("Schrodinger Sandbox"));
+    setWindowTitle(tr("Schrödinger Sandbox"));
     this->updateRenderer();
     this->rst_butt();
 }
@@ -419,7 +419,7 @@ void MainWindow::onlineHelp()
     {
         start_butt();
     }
-    QString link = "http://www.google.com";
+    QString link = "https://github.com/JulienBordaz/SchrodingerSandbox/blob/master/README.md";
     QDesktopServices::openUrl(QUrl(link));
 }
 
