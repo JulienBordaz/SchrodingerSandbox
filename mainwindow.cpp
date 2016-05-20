@@ -37,6 +37,7 @@ MainWindow::MainWindow(QWidget *parent) :
     this->qwave.initiateWavePacket(this->simulationSettings);
     this->qwave.initiatePropx();
 
+    // connecting the UI elements to the right functions
     connect(this->ui->startButton, SIGNAL(clicked()),this, SLOT(start_butt()));
     connect(this->ui->addPotButton, SIGNAL(clicked()),this, SLOT(addr_butt()));
     connect(this->ui->resetButton, SIGNAL(clicked()),this, SLOT(rst_butt()));
@@ -209,10 +210,10 @@ void MainWindow::mouseReleaseEvent(QMouseEvent *event)
         if (this->isDrawing == 2)
         {
             this->coord2=event->pos();
-            int xmin = std::min(this->coord1.x()-180,coord2.x()-180);
-            int xmax = std::max(this->coord1.x()-180,coord2.x()-180);
-            int ymin = std::min(362-this->coord1.y(),362-coord2.y());
-            int ymax = std::max(362-this->coord1.y(),362-coord2.y());
+            int xmin = std::min(this->coord1.x()-xShift,coord2.x()-xShift);
+            int xmax = std::max(this->coord1.x()-xShift,coord2.x()-xShift);
+            int ymin = std::min(320+yShift-this->coord1.y(),320+yShift-coord2.y());
+            int ymax = std::max(320+yShift-this->coord1.y(),320+yShift-coord2.y());
 
             EnergySelection *energyWindows = new EnergySelection(this);
 
@@ -237,9 +238,9 @@ void MainWindow::mouseMoveEvent(QMouseEvent *event)
     if (this->isDrawing == 2)
     {
         QPoint coord3=event->pos();
-        int xtemp=coord3.x()-180;
+        int xtemp=coord3.x()-xShift;
         // 320
-        int ytemp=298-(340-coord3.y());
+        int ytemp=-yShift+coord3.y();
         QPoint temp = QPoint(xtemp,ytemp);
         this->renderArea->setCoord2(temp);
         this->rst_butt();
@@ -271,9 +272,9 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
             if (this->isDrawing == 0)
             {
                 QPoint coordtemp = event->pos();
-                int xtemp=coordtemp.x()-180;
+                int xtemp=coordtemp.x()-xShift;
                 //342
-                int ytemp=362-coordtemp.y();
+                int ytemp=320+yShift-coordtemp.y();
                 int recttemp = this->qwave.getPotentialDistribution()->isOnRectangle(xtemp,ytemp,this->renderArea->getSelectedRectangle());
                 if (recttemp != -1)
                 {
@@ -291,8 +292,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
             {
                 this->coord1=event->pos();
                 this->isDrawing=2;
-                int xtemp=this->coord1.x()-180;
-                int ytemp=298-(340-this->coord1.y());
+                int xtemp=this->coord1.x()-xShift;
+                int ytemp=-yShift+this->coord1.y();
                 QPoint temp = QPoint(xtemp,ytemp);
                 this->renderArea->setCoord1(temp);
                 this->renderArea->setIsDrawingRectangle(true);
@@ -302,8 +303,8 @@ void MainWindow::mousePressEvent(QMouseEvent *event)
             if (this->isSettingR == true)
             {
                 QPoint coord=event->pos();
-                int xtemp=coord.x()-180;
-                int ytemp=298-(340-coord.y());
+                int xtemp=coord.x()-xShift;
+                int ytemp=-yShift+coord.y();
                 this->simulationSettings.setRx(xtemp);
                 this->simulationSettings.setRy(ytemp);
                 this->isSettingR=false;
@@ -469,24 +470,6 @@ void MainWindow::newSimulation()
                 rst_butt();
                 break;
             case 2:
-                rstpot_butt();
-                this->simulationSettings=SimulationSettings();
-                this->simulationSettings.setRx(320);
-                this->simulationSettings.setRy(160);
-                this->simulationSettings.potDistr->zeroPotential();
-                this->simulationSettings.potDistr->setRectangle(400,410,156,164,10000);
-                this->simulationSettings.potDistr->setRectangle(400,410,170,300,10000);
-                this->simulationSettings.potDistr->setRectangle(400,410,10,150,10000);
-                this->ui->setSigmaSlider->setSliderPosition(50);
-                this->ui->setkSlider->setSliderPosition(50);
-                this->kSelectArea->setkx(1);
-                this->kSelectArea->setky(0);
-                updateInitialCond();
-                this->qwave.initiateWavePacket(this->simulationSettings);
-                this->qwave.initiatePropx();
-                rst_butt();
-                break;
-            case 3:
                 rstpot_butt();
                 this->simulationSettings=SimulationSettings();
                 this->simulationSettings.setRx(320);

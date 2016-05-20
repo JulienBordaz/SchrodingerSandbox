@@ -70,24 +70,11 @@
      <string>Double split</string>
     </property>
    </widget>
-   <widget class="QRadioButton" name="resonButton">
-    <property name="geometry">
-     <rect>
-      <x>20</x>
-      <y>90</y>
-      <width>121</width>
-      <height>17</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>Resonant tunneling</string>
-    </property>
-   </widget>
    <widget class="QRadioButton" name="emptyButton">
     <property name="geometry">
      <rect>
       <x>20</x>
-      <y>120</y>
+      <y>90</y>
       <width>121</width>
       <height>17</height>
      </rect>

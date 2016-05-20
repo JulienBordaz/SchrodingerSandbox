@@ -72,6 +72,9 @@ private:
 
     SimulationSettings simulationSettings;
 
+    const int xShift = 181;
+    const int yShift = 44;
+
 private slots:
     void start_butt();
     void addr_butt();
