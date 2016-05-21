@@ -53,7 +53,7 @@ QDataStream & operator << (QDataStream & out, const SimulationSettings & simulat
 
 {
 
-    /*out << simulationSettings.kx
+    out << simulationSettings.kx
         << -simulationSettings.ky
         << simulationSettings.rx
         << simulationSettings.ry
@@ -65,7 +65,7 @@ QDataStream & operator << (QDataStream & out, const SimulationSettings & simulat
     out << simulationSettings.potDistr->rectanglePotList.length();
     for (int i=0;i<simulationSettings.potDistr->rectanglePotList.length();i++)
         for (int j=0;j<6;j++)
-            out << simulationSettings.potDistr->rectanglePotList.at(i)[j];*/
+            out << simulationSettings.potDistr->rectanglePotList.at(i)[j];
 
 
     return out;
@@ -76,7 +76,7 @@ QDataStream & operator >> (QDataStream & in, SimulationSettings & simulationSett
 
 {
 
-    /*in >> simulationSettings.kx;
+    in >> simulationSettings.kx;
     in >> simulationSettings.ky;
     in >> simulationSettings.rx;
     in >> simulationSettings.ry;
@@ -100,7 +100,7 @@ QDataStream & operator >> (QDataStream & in, SimulationSettings & simulationSett
         }
         rectanglePotListTemp.append(rectangleTemp);
     }
-    simulationSettings.potDistr->rectanglePotList=rectanglePotListTemp;*/
+    simulationSettings.potDistr->rectanglePotList=rectanglePotListTemp;
 
     return in;
 

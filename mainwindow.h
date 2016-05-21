@@ -74,6 +74,8 @@ private:
 
     const int xShift = 181;
     const int yShift = 44;
+    const int kSliderFactor = 50;
+    const int sigmaSliderFactor = 5;
 
 private slots:
     void start_butt();

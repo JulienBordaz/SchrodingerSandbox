@@ -71,15 +71,15 @@ MainWindow::~MainWindow()
 
 void MainWindow::updateInitialCond()
 {
-    this->inkx = this->kSelectArea->getkx()*this->ui->setkSlider->sliderPosition()/50;
-    this->inky = -this->kSelectArea->getky()*this->ui->setkSlider->sliderPosition()/50;
+    this->inkx = this->kSelectArea->getkx()*this->ui->setkSlider->sliderPosition()/kSliderFactor;
+    this->inky = -this->kSelectArea->getky()*this->ui->setkSlider->sliderPosition()/kSliderFactor;
 
-    this->simulationSettings.setKx(this->kSelectArea->getkx()*this->ui->setkSlider->sliderPosition()/50);
-    this->simulationSettings.setKy(-this->kSelectArea->getky()*this->ui->setkSlider->sliderPosition()/50);
+    this->simulationSettings.setKx(this->kSelectArea->getkx()*this->ui->setkSlider->sliderPosition()/kSliderFactor);
+    this->simulationSettings.setKy(-this->kSelectArea->getky()*this->ui->setkSlider->sliderPosition()/kSliderFactor);
 
-    this->insigma = this->ui->setSigmaSlider->sliderPosition()/5;
+    this->insigma = this->ui->setSigmaSlider->sliderPosition()/sigmaSliderFactor;
 
-    this->simulationSettings.setSigma(this->ui->setSigmaSlider->sliderPosition()/5);
+    this->simulationSettings.setSigma(this->ui->setSigmaSlider->sliderPosition()/sigmaSliderFactor);
 
     double sliderKPos = (double) this->ui->setkSlider->sliderPosition();
     QString kNorm;
@@ -375,10 +375,10 @@ void MainWindow::loadSimulation()
         file.close();
 
 
-        this->ui->setSigmaSlider->setSliderPosition(5*this->simulationSettings.getSigma());
-        this->ui->setkSlider->setSliderPosition(25*sqrt( this->simulationSettings.getKx()*this->simulationSettings.getKx()+this->simulationSettings.getKy()*this->simulationSettings.getKy()));
-        this->kSelectArea->setkx(this->simulationSettings.getKx()*25/this->ui->setkSlider->sliderPosition());
-        this->kSelectArea->setky(this->simulationSettings.getKy()*25/this->ui->setkSlider->sliderPosition());
+        this->ui->setSigmaSlider->setSliderPosition(sigmaSliderFactor*this->simulationSettings.getSigma());
+        this->ui->setkSlider->setSliderPosition(kSliderFactor*sqrt( this->simulationSettings.getKx()*this->simulationSettings.getKx()+this->simulationSettings.getKy()*this->simulationSettings.getKy()));
+        this->kSelectArea->setkx(this->simulationSettings.getKx()*kSliderFactor/this->ui->setkSlider->sliderPosition());
+        this->kSelectArea->setky(this->simulationSettings.getKy()*kSliderFactor/this->ui->setkSlider->sliderPosition());
 
         this->qwave.initiateWavePacket(this->simulationSettings);
         this->qwave.initiatePropx();

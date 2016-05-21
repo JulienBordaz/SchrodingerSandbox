@@ -2,6 +2,7 @@
 #define SIMULATIONSETTINGS_H
 
 #include <QVariant>
+#include <QDataStream>
 
 #include <potentialdistribution.h>
 
